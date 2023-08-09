@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "nodemon src/index.ts",
+    "build": "pnpm install && tsc",
+    "start": "node build"
   },
   "keywords": [],
   "author": "",

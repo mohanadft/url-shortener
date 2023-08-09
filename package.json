@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server:install": "pnpm --filter server add",
+    "server:remove": "pnpm --filter server remove",
+    "client:install": "pnpm --filter client add",
+    "client:remove": "pnpm --filter client remove",
+    "client:start": "pnpm --filter client start:dev",
+    "server:start": "pnpm --filter server start:dev"
   },
   "keywords": [],
   "author": "",
