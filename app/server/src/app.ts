@@ -1,6 +1,6 @@
-import express, { Application, Request, Response } from "express"
+import express, { Application, Request, Response } from 'express';
 
-const app: Application = express()
+const app: Application = express();
 
 // 🚀 Welcoming endpoint
 app.get('/', (req: Request, res: Response) => {
