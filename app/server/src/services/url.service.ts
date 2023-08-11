@@ -1,14 +1,34 @@
-import { Prisma, Url } from '@prisma/client';
-import urlModel from '../models';
+import { Prisma, PrismaClient, Url } from '@prisma/client';
 
-export const getUrls = async (): Promise<Url[]> => {
-  return await urlModel.findMany();
-};
+export class UrlService {
+  constructor(private readonly prismaService: PrismaClient) {}
 
-export const getUrl = async (id: string): Promise<Url | null> => {
-  return await urlModel.findUnique({ where: { id } });
-};
+  async getUrls(options?: Prisma.UrlFindManyArgs): Promise<Url[]> {
+    return await this.prismaService.url.findMany(options);
+  }
 
-export const addUrl = async (data: Prisma.UrlCreateInput): Promise<Url> => {
-  return await urlModel.create({ data });
-};
+  async getUrl(
+    id: string,
+    options?: Prisma.UrlFindUniqueArgs
+  ): Promise<Url | null> {
+    return await this.prismaService.url.findUnique({
+      ...options,
+      where: { id }
+    });
+  }
+
+  async addUrl(
+    data: Prisma.UrlCreateInput,
+    options?: Prisma.UrlCreateArgs
+  ): Promise<Url> {
+    return this.prismaService.url.create({ ...options, data });
+  }
+
+  async updateUrl(
+    id: string,
+    data: Prisma.UrlUpdateInput,
+    options?: Prisma.UrlUpdateArgs
+  ): Promise<Url> {
+    return this.prismaService.url.update({ ...options, where: { id }, data });
+  }
+}
