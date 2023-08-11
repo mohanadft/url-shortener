@@ -14,4 +14,6 @@ model Url {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   originalUrl String
   shortUrl    String @unique
+
+  @@map("urls")
 }
