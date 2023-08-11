@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
     "@types/node": "^20.4.9",
     "prisma": "^5.1.1",
