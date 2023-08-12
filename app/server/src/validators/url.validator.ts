@@ -15,6 +15,6 @@ type Url = z.infer<typeof Url>;
 export const validateUrl = (url: Url) => {
   const a = Url.safeParse(url);
   if (!a.success) {
-    throw new CustomError(a.error.message, httpStatus.UNPROCESSABLE_ENTITY);
+    throw new CustomError('Invalid Url', httpStatus.UNPROCESSABLE_ENTITY);
   }
 };
