@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { UrlService } from '../services/url.service';
 import { UrlController } from '../controllers/url.controller';
