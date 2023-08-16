@@ -21,7 +21,7 @@ export class UrlService {
     data: Prisma.UrlCreateInput,
     options?: Prisma.UrlCreateArgs
   ): Promise<Url> {
-    return this.prismaService.url.create({ ...options, data });
+    return await this.prismaService.url.create({ ...options, data });
   }
 
   async updateUrl(
@@ -29,6 +29,10 @@ export class UrlService {
     data: Prisma.UrlUpdateInput,
     options?: Prisma.UrlUpdateArgs
   ): Promise<Url> {
-    return this.prismaService.url.update({ ...options, where: { id }, data });
+    return await this.prismaService.url.update({
+      ...options,
+      where: { id },
+      data
+    });
   }
 }
