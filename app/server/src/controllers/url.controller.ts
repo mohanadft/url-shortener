@@ -1,5 +1,8 @@
 import { UrlService } from '../services/url.service';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+
+import { validateUrl } from '../validators/url.validator';
+import { isValidUrl } from '../helpers/url.helper';
 
 export class UrlController {
   constructor(public urlService: UrlService) {}
@@ -13,5 +16,26 @@ export class UrlController {
     const { id } = req.params;
     const url = await this.urlService.getUrl(id);
     res.json(url);
+  }
+
+  async addUrl(req: Request, res: Response, next: NextFunction) {
+    import('nanoid').then(async nanoidModule => {
+      try {
+        const { url: originalUrl } = req.body;
+
+        validateUrl({ originalUrl });
+        await isValidUrl(originalUrl);
+
+        const shortUrl = nanoidModule.nanoid(8);
+
+        const createdUrl = await this.urlService.addUrl({
+          originalUrl,
+          shortUrl
+        });
+        res.json(createdUrl);
+      } catch (e) {
+        next(e);
+      }
+    });
   }
 }
