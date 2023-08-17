@@ -11,7 +11,7 @@ const urlController = new UrlController(urlService);
 const urlRouter = Router();
 
 urlRouter.get('/', use(urlController.getUrls.bind(urlController)));
-urlRouter.get('/:id', use(urlController.getUrl.bind(urlController)));
 urlRouter.post('/', urlController.addUrl.bind(urlController));
+urlRouter.get('/:shortUrl', use(urlController.redirect.bind(urlController)));
 
 export default urlRouter;
