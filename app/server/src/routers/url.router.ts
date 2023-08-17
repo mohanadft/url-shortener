@@ -10,8 +10,8 @@ const urlController = new UrlController(urlService);
 
 const urlRouter = Router();
 
-urlRouter.get('/', urlController.getUrls.bind(urlController));
-urlRouter.get('/:id', urlController.getUrl.bind(urlController));
+urlRouter.get('/', use(urlController.getUrls.bind(urlController)));
+urlRouter.get('/:id', use(urlController.getUrl.bind(urlController)));
 urlRouter.post('/', urlController.addUrl.bind(urlController));
 
 export default urlRouter;
