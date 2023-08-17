@@ -4,6 +4,8 @@ import { NextFunction, Request, Response } from 'express';
 import { validateUrl } from '../validators/url.validator';
 import { isValidUrl } from '../helpers/url.helper';
 import envConfig from '../config/env.config';
+import { CustomError } from '../middlewares/errors';
+import httpStatus from 'http-status';
 
 export class UrlController {
   constructor(public urlService: UrlService) {}
@@ -40,5 +42,24 @@ export class UrlController {
         next(e);
       }
     });
+  }
+
+  async redirect(req: Request, res: Response) {
+    const { shortUrl } = req.params;
+
+    if (!shortUrl) {
+      throw new CustomError(
+        'Short URL query params is missing',
+        httpStatus.BAD_REQUEST
+      );
+    }
+
+    const url = await this.urlService.findByShortUrl(shortUrl.toString());
+
+    if (!url) {
+      throw new CustomError('url not found', httpStatus.NOT_FOUND);
+    }
+
+    res.redirect(url.originalUrl);
   }
 }
