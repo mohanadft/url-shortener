@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { validateUrl } from '../validators/url.validator';
 import { isValidUrl } from '../helpers/url.helper';
+import envConfig from '../config/env.config';
 
 export class UrlController {
   constructor(public urlService: UrlService) {}
@@ -26,7 +27,9 @@ export class UrlController {
         validateUrl({ originalUrl });
         await isValidUrl(originalUrl);
 
-        const shortUrl = nanoidModule.nanoid(8);
+        const shortUrl = nanoidModule.nanoid(
+          envConfig.shortUrlSize ? parseInt(envConfig.shortUrlSize) : 8
+        );
 
         const createdUrl = await this.urlService.addUrl({
           originalUrl,
