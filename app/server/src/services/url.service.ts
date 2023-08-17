@@ -35,4 +35,8 @@ export class UrlService {
       data
     });
   }
+
+  async findByShortUrl(shortUrl: string) {
+    return await this.prismaService.url.findFirst({ where: { shortUrl } });
+  }
 }
