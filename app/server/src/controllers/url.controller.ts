@@ -17,7 +17,7 @@ export class UrlController {
 
   async getUrl(req: Request<{ id: string }>, res: Response) {
     const { id } = req.params;
-    const url = await this.urlService.getUrl(id);
+    const url = await this.urlService.getUrl(parseInt(id));
     res.json(url);
   }
 
