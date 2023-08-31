@@ -8,7 +8,7 @@ export class UrlService {
   }
 
   async getUrl(
-    id: string,
+    id: number,
     options?: Prisma.UrlFindUniqueArgs
   ): Promise<Url | null> {
     return await this.prismaService.url.findUnique({
@@ -25,7 +25,7 @@ export class UrlService {
   }
 
   async updateUrl(
-    id: string,
+    id: number,
     data: Prisma.UrlUpdateInput,
     options?: Prisma.UrlUpdateArgs
   ): Promise<Url> {
